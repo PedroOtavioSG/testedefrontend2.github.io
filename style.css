@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+   background-color: #4682B4;
+}
+
+header {
+  background-color: #B0C4DE;
+  color: #000000;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0;
+}
+
+#board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.column {
+  flex: 0 1 calc(30% - 20px);
+  background-color: #B0C4DE;
+  padding: 10px;
+  margin: 10px;
+}
+
+h2 {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: grab;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #1c36ca;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+}
+
+button:hover {
+  box-shadow: none;
+}
+
+.step-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.step-number {
+  font-weight: bold;
+}
+
+.step-description {
+  margin-left: 10px;
+}

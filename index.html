@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Teste de Front-end</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Teste de Front-end</h1>
+  </header>
+  <button id="show-steps">Mostrar Passos</button>
+  <section id="steps" class="hidden">
+    <h2>Passos do Teste</h2>
+    <div class="step-box">
+      <h4>Planejamento</h4>
+      É recomendado que o planejamento inicie já na fase de levantamento de requisitos, uma vez que, após serem determinados os requisitos que o projeto deverá complementar, deverão haver meios de testá-los e avaliá-los para confirmar se, de fato, atenderam ao que foi solicitado.
+    </div>
+    <div class="step-box">
+      <h4>Elaboração dos casos de Testes</h4>
+      Trata-se do documento que define as unidades que serão testadas, incluindo dados de entrada, resultados, ações e condições gerais para a execução do teste, ou seja, responde à pergunta: o que será testado? A resposta poderia ser caso de teste 1: efetuar login.
+    </div>
+    <div class="step-box">
+      <h4>Execução do programa</h4>
+      Nessa etapa, executa-se o programa ou o código utilizando os atributos do HTML, como class, id, title, text, de acordo com o plano de teste e com os casos de testes elaborados, objetivando identificar os elementos da página e simular as interações do usuário. É por meio dessa interação que é possível obter os resultados e a coleta de erros.
+    </div>
+    <div class="step-box">
+      <h4>Avaliação de resultados:</h4>
+      Nessa etapa, a equipe de desenvolvimento avaliará o erro, buscando compreender o que o ocasionou, por exemplo erro de sistema, de código, de internet, de hardware, para, assim, corrigi-lo.
+    </div>
+  </section>
+  <div id="board">
+    <div id="todo" class="column">
+      <h2>Planejamento</h2>
+      <ul id="todo-list" class="sortable">
+        <!-- Itens de planejamento -->
+      </ul>
+      <input type="text" id="new-todo" placeholder="Adicionar item">
+      <button id="add-todo">Adicionar</button>
+    </div>
+    <div id="in-progress" class="column">
+      <h2>Caso de Teste</h2>
+      <ul id="in-progress-list" class="sortable">
+        <!-- Itens em progresso -->
+      </ul>
+      <input type="text" id="new-in-progress" placeholder="Adicionar item">
+      <button id="add-in-progress">Adicionar</button>
+    </div>
+    <div id="done" class="column">
+      <h2>Execução de Teste</h2>
+      <ul id="done-list" class="sortable">
+        <!-- Itens concluídos -->
+      </ul>
+      <input type="text" id="new-done" placeholder="Adicionar item">
+      <button id="add-done">Adicionar</button>
+    </div>
+    <div id="new-test" class="column">
+      <h2>Avaliação de Teste</h2>
+      <ul id="new-test-list" class="sortable">
+    
+      </ul>
+      <input type="text" id="new-new-test" placeholder="Adicionar item">
+      <button id="add-new-test">Adicionar</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    const showStepsButton = document.getElementById('show-steps');
+    const stepsSection = document.getElementById('steps');
+
+    showStepsButton.addEventListener('click', () => {
+      stepsSection.classList.remove('hidden');
+    });
+
+    // Função para criar um novo item de teste
+    function createTestItem(text) {
+      const li = document.createElement("li");
+      li.textContent = text;
+      return li;
+    }
+
+    // Função para adicionar um novo item de teste a uma coluna
+    function addTestItem(columnId, inputId) {
+      const input = document.getElementById(inputId);
+      const text = input.value.trim();
+      if (text !== "") {
+        const column = document.getElementById(columnId);
+        const list = column.querySelector("ul");
+        const newItem = createTestItem(text);
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = 'Excluir';
+        deleteButton.onclick = function() {
+          newItem.remove();
+        };
+        newItem.appendChild(deleteButton);
+        list.appendChild(newItem);
+        input.value = "";
+      }
+    }
+
+    // Função para inicializar os eventos dos botões de adicionar
+    function initializeAddButtons() {
+      document.getElementById("add-todo").addEventListener("click", function () {
+        addTestItem("todo", "new-todo");
+      });
+
+      document.getElementById("add-in-progress").addEventListener("click", function () {
+        addTestItem("in-progress", "new-in-progress");
+      });
+
+      document.getElementById("add-done").addEventListener("click", function () {
+        addTestItem("done", "new-done");
+      });
+
+      document.getElementById("add-new-test").addEventListener("click", function () {
+        addTestItem("new-test", "new-new-test");
+      });
+    }
+
+    // Função para inicializar a funcionalidade de classificação dos itens
+    function initializeSorting() {
+      const sortables = document.querySelectorAll(".sortable");
+
+      sortables.forEach(function (sortable) {
+        new Sortable(sortable, {
+          group: "shared",
+          animation: 150,
+          fallbackOnBody: true,
+        });
+      });
+    }
+
+    // Função de inicialização
+    function initialize() {
+      initializeAddButtons();
+      initializeSorting();
+    }
+
+    // Chamada da função de inicialização quando a página é carregada
+    window.addEventListener("load", initialize);
+  </script>
+</body>
+</html>
